@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.local
+*.log
+.DS_Store
+server/.data/
+server/uploads/public/*
+server/uploads/private/*
+!server/uploads/public/.gitkeep
+!server/uploads/private/.gitkeep
+coverage/
