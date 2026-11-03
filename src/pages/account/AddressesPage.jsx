@@ -25,7 +25,7 @@ export default function AddressesPage() {
   return (
     <div>
       <div className="mb-5 flex items-center justify-between">
-        <h1 className="text-2xl font-extrabold tracking-tight">Saved addresses</h1>
+        <h1 className="text-xl font-semibold">Saved addresses</h1>
         <Button onClick={() => setModal({ open: true, address: null })}><Plus className="h-4 w-4" /> Add address</Button>
       </div>
       {isLoading && <div className="space-y-3"><Skeleton className="h-28" /><Skeleton className="h-28" /></div>}

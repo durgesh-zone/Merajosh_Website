@@ -6,7 +6,7 @@ import { formatDateTime } from '@/lib/format';
 export function DeliveryOtpCard({ otp, deliveryBoy }) {
   if (!otp?.code) return null;
   return (
-    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-violet-700 p-6 text-white shadow-lift">
+    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="overflow-hidden rounded-sm bg-brand-600 p-6 text-white shadow-soft">
       <div className="flex items-center gap-2 text-sm font-semibold text-white/80"><KeyRound className="h-4 w-4" /> Delivery OTP</div>
       <div className="mt-3 flex gap-2" aria-label={`Delivery OTP ${otp.code.split('').join(' ')}`}>
         {otp.code.split('').map((d, i) => (

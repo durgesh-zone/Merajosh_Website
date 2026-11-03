@@ -16,16 +16,16 @@ const LINKS = [
 export default function AccountLayout() {
   const { user } = useAuth();
   return (
-    <div className="container-page grid gap-6 py-6 lg:grid-cols-[260px_1fr]">
+    <div className="container-page grid gap-3 py-3 lg:grid-cols-[280px_1fr]">
       <aside>
-        <div className="card mb-4 flex items-center gap-3 p-4">
-          <span className="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-brand-500 to-violet-600 text-lg font-bold text-white">{user?.name?.[0]?.toUpperCase()}</span>
-          <div className="min-w-0"><p className="text-xs text-slate-500">Hello,</p><p className="truncate font-bold">{user?.name}</p></div>
+        <div className="card mb-3 flex items-center gap-3 p-3">
+          <span className="grid h-12 w-12 place-items-center rounded-full bg-brand-600 text-lg font-bold text-white">{user?.name?.[0]?.toUpperCase()}</span>
+          <div className="min-w-0"><p className="text-xs text-fk-muted">Hello,</p><p className="truncate font-semibold">{user?.name}</p></div>
         </div>
-        <nav className="card scrollbar-none flex gap-1 overflow-x-auto p-2 lg:flex-col" aria-label="Account">
+        <nav className="card scrollbar-none flex overflow-x-auto lg:flex-col" aria-label="Account">
           {LINKS.map(({ to, label, icon: Icon }) => (
-            <NavLink key={to} to={to} className={({ isActive }) => cn('flex items-center gap-3 whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-semibold transition', isActive ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-300' : 'text-slate-600 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800')}>
-              <Icon className="h-4 w-4" /> {label}
+            <NavLink key={to} to={to} className={({ isActive }) => cn('flex items-center gap-3 whitespace-nowrap border-b-2 px-4 py-3 text-sm font-medium transition lg:border-b-0 lg:border-l-4 lg:py-3.5', isActive ? 'border-brand-600 bg-brand-50 font-semibold text-brand-600 dark:bg-brand-500/10 dark:text-brand-300' : 'border-transparent text-fk-ink hover:bg-fk-page hover:text-brand-600 dark:text-slate-300 dark:hover:bg-slate-800')}>
+              <Icon className="h-[18px] w-[18px] text-brand-600" /> {label}
             </NavLink>
           ))}
         </nav>

@@ -32,7 +32,7 @@ export default function RegisterPage() {
   return (
     <AuthShell title="Create your account" subtitle="It takes less than a minute.">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
-        {errors.root && <div role="alert" className="rounded-xl bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700 dark:bg-rose-500/10 dark:text-rose-300">{errors.root.message}</div>}
+        {errors.root && <div role="alert" className="rounded-sm bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700 dark:bg-rose-500/10 dark:text-rose-300">{errors.root.message}</div>}
         <Input label="Full name" autoComplete="name" error={errors.name?.message} {...register('name')} />
         <div className="grid gap-4 sm:grid-cols-2">
           <Input label="Email" type="email" autoComplete="email" error={errors.email?.message} {...register('email')} />
@@ -40,10 +40,10 @@ export default function RegisterPage() {
         </div>
         <Input label="Password" type="password" autoComplete="new-password" hint="At least 8 characters with a letter and a number" error={errors.password?.message} {...register('password')} />
         <Input label="Confirm password" type="password" autoComplete="new-password" error={errors.confirmPassword?.message} {...register('confirmPassword')} />
-        <Button type="submit" size="lg" className="w-full" loading={isSubmitting}>Create account</Button>
+        <Button type="submit" size="lg" variant="buy" className="w-full uppercase" loading={isSubmitting}>Continue</Button>
       </form>
       <p className="mt-6 text-center text-sm text-slate-500">
-        Already have an account? <Link to="/login" state={location.state} className="font-semibold text-brand-600 hover:underline">Sign in</Link>
+        Already have an account? <Link to="/login" state={location.state} className="font-semibold text-brand-600">Sign in</Link>
       </p>
     </AuthShell>
   );

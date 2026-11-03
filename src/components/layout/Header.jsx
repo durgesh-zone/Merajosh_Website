@@ -15,36 +15,41 @@ export function Header() {
   const { data: categories = [] } = useQuery({ queryKey: ['categories', 'tree'], queryFn: () => catalogApi.categories(), staleTime: 300_000 });
 
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/85">
-      <div className="container-page flex h-16 items-center gap-4">
-        <Logo />
-        <SearchBar className="hidden flex-1 md:block md:max-w-xl lg:ml-6" />
-        <div className="ml-auto flex items-center gap-1">
-          <ThemeToggle />
-          <Link to="/account/wishlist" className="hidden h-10 w-10 place-items-center rounded-xl text-slate-600 hover:bg-slate-100 sm:grid dark:text-slate-300 dark:hover:bg-slate-800" aria-label="Wishlist">
-            <Heart className="h-5 w-5" />
-          </Link>
-          <Link to="/cart" className="relative grid h-10 w-10 place-items-center rounded-xl text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800" aria-label={`Cart, ${count} items`}>
-            <ShoppingCart className="h-5 w-5" />
-            <AnimatePresence>
-              {count > 0 && (
-                <motion.span key={count} initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-rose-500 px-1 text-[11px] font-bold text-white ring-2 ring-white dark:ring-slate-950">
-                  {count > 99 ? '99+' : count}
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </Link>
-          <div className="ml-1"><UserMenu /></div>
+    <header className="sticky top-0 z-30 shadow-md">
+      <div className="bg-brand-600 text-white dark:bg-slate-900">
+        <div className="container-page flex h-14 items-center gap-3 sm:gap-6">
+          <Logo />
+          <SearchBar className="hidden flex-1 md:block md:max-w-2xl" />
+          <div className="ml-auto flex items-center gap-1 sm:gap-3">
+            <UserMenu />
+            <Link to="/account/wishlist" className="hidden items-center gap-1.5 rounded-sm px-2 py-2 text-[15px] font-semibold hover:bg-white/10 lg:flex" aria-label="Wishlist">
+              <Heart className="h-5 w-5" /> <span className="hidden xl:inline">Wishlist</span>
+            </Link>
+            <Link to="/cart" className="relative flex items-center gap-1.5 rounded-sm px-2 py-2 text-[15px] font-semibold hover:bg-white/10" aria-label={`Cart, ${count} items`}>
+              <span className="relative">
+                <ShoppingCart className="h-5 w-5" />
+                <AnimatePresence>
+                  {count > 0 && (
+                    <motion.span key={count} initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className="absolute -right-2 -top-2 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-fk-orange px-1 text-[10px] font-bold text-white ring-2 ring-brand-600 dark:ring-slate-900">
+                      {count > 99 ? '99+' : count}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </span>
+              <span className="hidden sm:inline">Cart</span>
+            </Link>
+            <ThemeToggle />
+          </div>
         </div>
+        <div className="container-page pb-2.5 md:hidden"><SearchBar /></div>
       </div>
-      <div className="container-page pb-3 md:hidden"><SearchBar /></div>
-      <nav className="hidden border-t border-slate-100 md:block dark:border-slate-800/70" aria-label="Categories">
-        <div className="container-page scrollbar-none flex gap-1 overflow-x-auto py-1.5">
-          <NavLink to="/products" end className={({ isActive }) => cn('whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition', isActive ? 'text-brand-600' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800')}>All products</NavLink>
+      <nav className="hidden bg-white md:block dark:bg-slate-900 dark:ring-1 dark:ring-slate-800" aria-label="Categories">
+        <div className="container-page scrollbar-none flex justify-start gap-1 overflow-x-auto lg:justify-center">
+          <NavLink to="/products" end className={({ isActive }) => cn('whitespace-nowrap border-b-2 px-4 py-2.5 text-sm font-semibold transition', isActive ? 'border-brand-600 text-brand-600' : 'border-transparent text-fk-ink hover:text-brand-600 dark:text-slate-300')}>All products</NavLink>
           {categories.map((c) => (
-            <Link key={c._id} to={`/products?category=${c.slug}`} className="whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800">{c.name}</Link>
+            <Link key={c._id} to={`/products?category=${c.slug}`} className="whitespace-nowrap border-b-2 border-transparent px-4 py-2.5 text-sm font-semibold text-fk-ink transition hover:text-brand-600 dark:text-slate-300">{c.name}</Link>
           ))}
-          <Link to="/products?type=virtual" className="whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium text-brand-600 transition hover:bg-brand-50 dark:text-brand-400 dark:hover:bg-brand-500/10">E-books</Link>
+          <Link to="/products?type=virtual" className="whitespace-nowrap border-b-2 border-transparent px-4 py-2.5 text-sm font-semibold text-fk-ink transition hover:text-brand-600 dark:text-slate-300">E-books</Link>
         </div>
       </nav>
     </header>

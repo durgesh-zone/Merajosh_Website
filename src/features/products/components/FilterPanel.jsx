@@ -6,8 +6,8 @@ import { Button, Checkbox } from '@/components/ui';
 import { cn } from '@/lib/utils';
 
 const Section = ({ title, children }) => (
-  <div className="border-b border-slate-100 py-5 last:border-0 dark:border-slate-800">
-    <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-slate-500">{title}</h3>
+  <div className="border-b border-slate-100 py-4 last:border-0 dark:border-slate-800">
+    <h3 className="mb-3 text-[13px] font-semibold uppercase tracking-wide text-fk-ink dark:text-slate-200">{title}</h3>
     {children}
   </div>
 );
@@ -28,8 +28,8 @@ export function FilterPanel({ filters, onChange, onClear }) {
   return (
     <div>
       <div className="flex items-center justify-between pb-2">
-        <h2 className="text-lg font-bold">Filters</h2>
-        <button onClick={onClear} className="text-sm font-semibold text-brand-600 hover:underline">Clear all</button>
+        <h2 className="text-lg font-semibold">Filters</h2>
+        <button onClick={onClear} className="text-xs font-semibold uppercase text-brand-600 hover:underline">Clear all</button>
       </div>
 
       <Section title="Category">
@@ -81,7 +81,7 @@ export function FilterPanel({ filters, onChange, onClear }) {
           {[4, 3, 2].map((r) => (
             <label key={r} className="flex cursor-pointer items-center gap-2.5 text-sm">
               <input type="radio" name="rating" className="accent-brand-600" checked={Number(filters.rating) === r} onChange={() => onChange({ rating: String(r) })} />
-              <span className="inline-flex items-center gap-1">{r}<Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" /> & above</span>
+              <span className="inline-flex items-center gap-1">{r}<Star className="h-3.5 w-3.5 fill-current" /> & above</span>
             </label>
           ))}
           {filters.rating && <button className="text-xs text-slate-500 hover:underline" onClick={() => onChange({ rating: '' })}>Any rating</button>}
@@ -91,7 +91,7 @@ export function FilterPanel({ filters, onChange, onClear }) {
       <Section title="Product type">
         <div className="flex gap-2">
           {[['', 'All'], ['physical', 'Physical'], ['virtual', 'E-books']].map(([v, l]) => (
-            <button key={v} onClick={() => onChange({ type: v })} className={cn('rounded-full border px-3 py-1.5 text-xs font-semibold transition', (filters.type || '') === v ? 'border-brand-600 bg-brand-600 text-white' : 'border-slate-200 hover:border-slate-300 dark:border-slate-700')}>{l}</button>
+            <button key={v} onClick={() => onChange({ type: v })} className={cn('rounded-full border px-3 py-1.5 text-xs font-semibold transition', (filters.type || '') === v ? 'border-brand-600 bg-brand-600 text-white' : 'border-slate-300 hover:border-slate-300 dark:border-slate-700')}>{l}</button>
           ))}
         </div>
       </Section>
@@ -128,7 +128,7 @@ export function ActiveFilters({ filters, onChange }) {
         <button
           key={key}
           onClick={() => onChange(key === 'price' ? { minPrice: '', maxPrice: '' } : { [key]: '' })}
-          className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold capitalize text-brand-700 hover:bg-brand-100 dark:bg-brand-500/10 dark:text-brand-300"
+          className="inline-flex items-center gap-1.5 rounded-sm bg-slate-100 px-2.5 py-1 text-xs font-medium capitalize text-fk-ink hover:line-through dark:bg-slate-800 dark:text-slate-200 dark:bg-brand-500/10 dark:text-brand-300"
         >
           {label} <X className="h-3 w-3" />
         </button>

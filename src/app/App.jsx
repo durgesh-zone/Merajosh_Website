@@ -17,7 +17,7 @@ export default function App() {
             toastOptions={{
               duration: 3500,
               className: '!rounded-2xl !bg-white !text-slate-900 !shadow-lift dark:!bg-slate-800 dark:!text-slate-100 !text-sm !font-medium',
-              success: { iconTheme: { primary: '#10b981', secondary: '#fff' } },
+              success: { iconTheme: { primary: '#388e3c', secondary: '#fff' } },
             }}
           />
         </AuthProvider>

@@ -84,7 +84,7 @@ export default function OrderDetailPage() {
           <p className="mt-1 text-sm text-slate-500">Placed on {formatDateTime(order.createdAt)}</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          {canPay && <Button variant="accent" onClick={() => retry.mutate()} loading={retry.isPending}><CreditCard className="h-4 w-4" /> Complete payment</Button>}
+          {canPay && <Button variant="buy" onClick={() => retry.mutate()} loading={retry.isPending}><CreditCard className="h-4 w-4" /> Complete payment</Button>}
           {order.status !== 'pending_payment' && <Button variant="outline" onClick={invoice} disabled={downloading}>{downloading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />} Invoice</Button>}
           {canReturn && <Button variant="outline" onClick={() => { setReason(''); setDialog('return'); }}><RotateCcw className="h-4 w-4" /> Return</Button>}
           {canCancel && <Button variant="ghost" className="text-rose-600" onClick={() => { setReason(''); setDialog('cancel'); }}><XCircle className="h-4 w-4" /> Cancel</Button>}

@@ -23,7 +23,7 @@ export default function OrdersPage() {
   return (
     <div>
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-extrabold tracking-tight">My orders</h1>
+        <h1 className="text-xl font-semibold">My orders</h1>
         <Tabs tabs={TABS} value={status} onChange={(v) => { setStatus(v); setPage(1); }} layoutId="order-tabs" />
       </div>
       <div className="space-y-3">

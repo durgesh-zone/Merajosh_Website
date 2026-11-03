@@ -31,7 +31,7 @@ export default function LibraryPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold tracking-tight">My library</h1>
+      <h1 className="text-xl font-semibold">My library</h1>
       <p className="mt-1 text-sm text-slate-500">E-books you've purchased. Downloads are protected and only work while you're signed in.</p>
       <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {isLoading && Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} className="h-40" />)}

@@ -32,9 +32,9 @@ export function ReviewsSection({ product }) {
   const reviews = data?.data?.reviews || [];
 
   return (
-    <section id="reviews" className="card mt-8 p-5 sm:p-8">
+    <section id="reviews" className="card mt-3 scroll-mt-32 p-4 sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
-        <h2 className="text-xl font-extrabold">Ratings & reviews</h2>
+        <h2 className="section-title">Ratings & reviews</h2>
         {eligibility?.canReview && <Button variant="secondary" onClick={() => setFormOpen(true)}><PencilLine className="h-4 w-4" /> Write a review</Button>}
         {eligibility?.review && <Button variant="outline" onClick={() => setFormOpen(true)}><PencilLine className="h-4 w-4" /> Edit your review</Button>}
         {!isAuthenticated && <Link to="/login" className="text-sm font-semibold text-brand-600 hover:underline">Sign in to review</Link>}

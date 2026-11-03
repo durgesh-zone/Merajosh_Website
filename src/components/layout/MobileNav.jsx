@@ -15,13 +15,13 @@ const ITEMS = [
 export function MobileNav() {
   const { count } = useCart();
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden dark:border-slate-800 dark:bg-slate-950/95" aria-label="Primary">
+    <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-1px_4px_rgba(0,0,0,0.06)] md:hidden dark:border-slate-800 dark:bg-slate-950" aria-label="Primary">
       <div className="grid grid-cols-5">
         {ITEMS.map(({ to, label, icon: Icon, end, badge }) => (
           <NavLink key={to} to={to} end={end} className={({ isActive }) => cn('relative flex flex-col items-center gap-0.5 py-2 text-[11px] font-semibold', isActive ? 'text-brand-600 dark:text-brand-400' : 'text-slate-500')}>
             <Icon className="h-5 w-5" />
             {label}
-            {badge && count > 0 && <span className="absolute right-[22%] top-1 grid h-4 min-w-4 place-items-center rounded-full bg-rose-500 px-1 text-[10px] text-white">{count}</span>}
+            {badge && count > 0 && <span className="absolute right-[22%] top-1 grid h-4 min-w-4 place-items-center rounded-full bg-fk-orange px-1 text-[10px] text-white">{count}</span>}
           </NavLink>
         ))}
       </div>

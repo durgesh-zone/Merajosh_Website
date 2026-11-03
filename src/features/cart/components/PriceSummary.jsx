@@ -16,31 +16,33 @@ export function PriceSummary({ summary, coupon, children }) {
   const remaining = summary.freeShippingThreshold - summary.itemsTotal;
 
   return (
-    <div className="card p-5">
-      <h2 className="text-sm font-bold uppercase tracking-wide text-slate-500">Price details</h2>
-      <dl className="mt-4 space-y-3 text-sm">
+    <div className="card">
+      <h2 className="border-b border-slate-200 px-6 py-3.5 text-base font-semibold uppercase text-fk-muted dark:border-slate-800">Price details</h2>
+      <div className="px-6 pb-5">
+      <dl className="mt-5 space-y-4 text-[15px]">
         {rows.map((r) => (
           <div key={r.label} className="flex justify-between">
-            <dt className="text-slate-600 dark:text-slate-400">{r.label}</dt>
-            <dd className={r.green ? 'font-medium text-emerald-600' : 'font-medium'}>{r.value}</dd>
+            <dt>{r.label}</dt>
+            <dd className={r.green ? 'text-fk-green' : ''}>{r.value}</dd>
           </div>
         ))}
-        <div className="flex justify-between border-t border-dashed border-slate-200 pt-3 text-base font-bold dark:border-slate-700">
+        <div className="flex justify-between border-y border-dashed border-slate-300 py-4 text-lg font-semibold dark:border-slate-700">
           <dt>Total amount</dt>
           <dd>{formatPrice(total)}</dd>
         </div>
       </dl>
       {savings > 0 && (
-        <p className="mt-4 rounded-xl bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300">
-          You save {formatPrice(savings)} on this order 🎉
+        <p className="mt-4 text-[15px] font-semibold text-fk-green">
+          You will save {formatPrice(savings)} on this order
         </p>
       )}
       {summary.hasPhysical && summary.shippingFee > 0 && remaining > 0 && (
         <p className="mt-3 flex items-center gap-2 text-xs text-slate-500">
-          <Truck className="h-4 w-4 text-brand-500" /> Add {formatPrice(remaining)} more for free delivery
+          <Truck className="h-4 w-4 text-brand-600" /> Add {formatPrice(remaining)} more for free delivery
         </p>
       )}
       {children}
+      </div>
     </div>
   );
 }

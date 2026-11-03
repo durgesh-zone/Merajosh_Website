@@ -26,7 +26,7 @@ export default function CartPage() {
   if (!items.length) {
     return (
       <div className="container-page py-12">
-        <EmptyState icon={ShoppingCart} title="Your cart is empty" description="Looks like you haven't added anything yet. Explore our latest products and offers." action={<Button as={Link} to="/products" size="lg">Start shopping</Button>} />
+        <EmptyState icon={ShoppingCart} title="Your cart is empty" description="Looks like you haven't added anything yet. Explore our latest products and offers." action={<Button as={Link} to="/products" size="lg" className="px-16">Shop now</Button>} />
       </div>
     );
   }
@@ -35,12 +35,13 @@ export default function CartPage() {
   const checkout = () => navigate(isAuthenticated ? '/checkout' : '/login', { state: isAuthenticated ? undefined : { from: { pathname: '/checkout' } } });
 
   return (
-    <div className="container-page py-6 pb-28 lg:pb-8">
-      <h1 className="text-2xl font-extrabold tracking-tight">Shopping cart <span className="text-base font-medium text-slate-500">({summary.itemCount} item{summary.itemCount === 1 ? '' : 's'})</span></h1>
-      <div className="mt-6 grid items-start gap-6 lg:grid-cols-[1fr_380px]">
-        <div className="card px-5">
+    <div className="container-page py-3 pb-28 lg:pb-3">
+      <div className="grid items-start gap-3 lg:grid-cols-[1fr_380px]">
+        <div className="card">
+          <h1 className="border-b border-slate-100 px-4 py-4 text-lg font-semibold sm:px-6 dark:border-slate-800">My Cart <span className="text-sm font-normal text-fk-muted">({summary.itemCount} item{summary.itemCount === 1 ? '' : 's'})</span></h1>
+          <div className="px-4 sm:px-6">
           {hasIssues && (
-            <p className="mt-5 flex items-center gap-2 rounded-xl bg-amber-50 px-3 py-2 text-sm font-medium text-amber-800 dark:bg-amber-500/10 dark:text-amber-300">
+            <p className="mt-4 flex items-center gap-2 rounded-sm bg-amber-50 px-3 py-2 text-sm font-medium text-amber-800 dark:bg-amber-500/10 dark:text-amber-300">
               <AlertTriangle className="h-4 w-4" /> Some items need your attention before checkout.
             </p>
           )}
@@ -51,22 +52,24 @@ export default function CartPage() {
               ))}
             </AnimatePresence>
           </ul>
+          </div>
+          <div className="sticky bottom-0 hidden justify-end border-t border-slate-100 bg-white px-6 py-4 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] lg:flex dark:border-slate-800 dark:bg-slate-900">
+            <Button size="lg" variant="buy" className="h-12 w-60 uppercase" onClick={checkout} disabled={hasIssues}>Place order</Button>
+          </div>
         </div>
-        <div className="space-y-4 lg:sticky lg:top-32">
-          <PriceSummary summary={summary}>
-            <Button size="lg" className="mt-5 hidden w-full lg:flex" onClick={checkout} disabled={hasIssues}>Proceed to checkout</Button>
-          </PriceSummary>
-          <p className="flex items-center justify-center gap-2 text-xs text-slate-500"><ShieldCheck className="h-4 w-4" /> Safe and secure payments. 100% authentic products.</p>
+        <div className="space-y-4 lg:sticky lg:top-[120px]">
+          <PriceSummary summary={summary} />
+          <p className="flex items-center gap-2 px-2 text-sm font-semibold text-fk-muted"><ShieldCheck className="h-6 w-6 shrink-0" /> Safe and secure payments. Easy returns. 100% authentic products.</p>
         </div>
       </div>
 
       {/* Sticky checkout bar on phones */}
-      <div className="fixed inset-x-0 bottom-[58px] z-20 flex items-center justify-between gap-4 border-t border-slate-200 bg-white px-4 py-3 lg:hidden dark:border-slate-800 dark:bg-slate-900">
+      <div className="fixed inset-x-0 bottom-[58px] z-20 flex items-center justify-between gap-4 bg-white px-4 py-2.5 shadow-[0_-2px_6px_rgba(0,0,0,0.08)] lg:hidden dark:bg-slate-900">
         <div>
           <p className="text-lg font-extrabold">₹{(summary.itemsTotal + summary.shippingFee).toLocaleString('en-IN')}</p>
           <p className="text-xs text-slate-500">incl. delivery</p>
         </div>
-        <Button size="lg" onClick={checkout} disabled={hasIssues}>Checkout</Button>
+        <Button size="lg" variant="buy" className="uppercase" onClick={checkout} disabled={hasIssues}>Place order</Button>
       </div>
     </div>
   );

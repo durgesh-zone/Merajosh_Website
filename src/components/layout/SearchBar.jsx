@@ -61,8 +61,7 @@ export function SearchBar({ className, autoFocus }) {
 
   return (
     <div ref={boxRef} className={cn('relative', className)}>
-      <form onSubmit={submit} role="search">
-        <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+      <form onSubmit={submit} role="search" className="relative">
         <input
           value={q}
           autoFocus={autoFocus}
@@ -73,14 +72,16 @@ export function SearchBar({ className, autoFocus }) {
           }}
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
-          placeholder="Search for lipsticks, sweets, toys, e-books…"
-          className="h-11 w-full rounded-xl border border-transparent bg-slate-100 pl-10 pr-10 text-sm transition placeholder:text-slate-400 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-500/15 dark:bg-slate-800 dark:focus:bg-slate-900"
+          placeholder="Search for products, brands and more"
+          className="h-9 w-full rounded-sm border-0 bg-white pl-4 pr-11 text-sm text-fk-ink shadow-sm placeholder:text-fk-muted focus:outline-none focus:ring-2 focus:ring-fk-yellow/70 sm:h-10 dark:bg-slate-800 dark:text-slate-100"
           aria-label="Search products"
           aria-autocomplete="list"
           aria-expanded={open && options.length > 0}
           role="combobox"
         />
-        {isFetching && <Loader2 className="absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-slate-400" />}
+        <button type="submit" className="absolute right-0 top-0 grid h-full w-11 place-items-center text-brand-600 dark:text-brand-400" aria-label="Search">
+          {isFetching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-[18px] w-[18px]" strokeWidth={2.5} />}
+        </button>
       </form>
 
       <AnimatePresence>
@@ -90,16 +91,16 @@ export function SearchBar({ className, autoFocus }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             role="listbox"
-            className="absolute inset-x-0 top-full z-40 mt-2 overflow-hidden rounded-2xl border border-slate-200 bg-white py-2 shadow-lift dark:border-slate-700 dark:bg-slate-900"
+            className="absolute inset-x-0 top-full z-40 mt-0.5 overflow-hidden rounded-sm bg-white py-1 text-fk-ink shadow-lift dark:border-slate-700 dark:bg-slate-900"
           >
             {options.length === 0 && <li className="px-4 py-3 text-sm text-slate-500">No matches for “{debounced}”</li>}
             {options.map((o, i) => (
               <li key={o.key} role="option" aria-selected={i === active}>
                 <button onMouseEnter={() => setActive(i)} onClick={() => go(o.to)} className={cn('flex w-full items-center gap-3 px-4 py-2 text-left text-sm', i === active && 'bg-slate-50 dark:bg-slate-800')}>
                   {o.type === 'category' ? (
-                    <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-500/10"><Tag className="h-4 w-4" /></span>
+                    <span className="grid h-9 w-9 place-items-center rounded-sm bg-brand-50 text-brand-600 dark:bg-brand-500/10"><Tag className="h-4 w-4" /></span>
                   ) : (
-                    <img src={assetUrl(o.image)} alt="" className="h-9 w-9 rounded-lg object-cover" />
+                    <img src={assetUrl(o.image)} alt="" className="h-9 w-9 rounded-sm object-contain" />
                   )}
                   <span className="min-w-0 flex-1 truncate">{o.type === 'category' ? <>in <b>{o.label}</b></> : o.label}</span>
                   {o.price != null && <span className="font-semibold">{formatPrice(o.price)}</span>}

@@ -16,16 +16,16 @@ export function ProductGallery({ images = [], title }) {
               key={img.url}
               onClick={() => setActive(i)}
               onMouseEnter={() => setActive(i)}
-              className={cn('h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 bg-slate-100 transition dark:bg-slate-800', i === active ? 'border-brand-500' : 'border-transparent opacity-70 hover:opacity-100')}
+              className={cn('h-16 w-16 shrink-0 overflow-hidden rounded-sm border-2 bg-white p-1 transition dark:bg-slate-800', i === active ? 'border-brand-600' : 'border-transparent opacity-70 hover:opacity-100')}
               aria-label={`Show image ${i + 1}`}
             >
-              <img src={assetUrl(img.url)} alt="" className="h-full w-full object-cover" />
+              <img src={assetUrl(img.url)} alt="" className="h-full w-full object-contain" />
             </button>
           ))}
         </div>
       )}
       <div
-        className="relative aspect-square flex-1 cursor-zoom-in overflow-hidden rounded-3xl bg-slate-100 dark:bg-slate-800"
+        className="relative aspect-square flex-1 cursor-zoom-in overflow-hidden rounded-sm bg-white dark:bg-slate-900"
         onMouseMove={(e) => {
           const r = e.currentTarget.getBoundingClientRect();
           setZoom({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
@@ -42,7 +42,7 @@ export function ProductGallery({ images = [], title }) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="h-full w-full object-cover transition-transform duration-200"
+              className="h-full w-full object-contain transition-transform duration-200"
               style={zoom ? { transform: 'scale(1.6)', transformOrigin: `${zoom.x}% ${zoom.y}%` } : undefined}
             />
           )}

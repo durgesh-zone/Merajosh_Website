@@ -13,12 +13,12 @@ export default function HomePage() {
   const { data, isLoading } = useQuery({ queryKey: ['home'], queryFn: catalogApi.home });
 
   return (
-    <div className="container-page pt-4 sm:pt-6">
-      <HeroSlider banners={data?.banners} loading={isLoading} />
+    <div className="container-page space-y-2.5 pt-2.5 sm:space-y-3 sm:pt-3">
       <CategoryStrip categories={data?.categories} loading={isLoading} />
+      <HeroSlider banners={data?.banners} loading={isLoading} />
       <FlashSale sale={data?.flashSale} />
       <ProductRail title="Featured picks" subtitle="Hand-picked favourites from our team" products={data?.featured} loading={isLoading} viewAllTo="/products?featured=true" />
-      <ProductRail title="Best sellers" subtitle="What everyone is buying right now" products={data?.bestSellers} loading={isLoading} viewAllTo="/products?sort=popularity" badge={<Badge tone="amber">🔥 Trending</Badge>} />
+      <ProductRail title="Best sellers" subtitle="What everyone is buying right now" products={data?.bestSellers} loading={isLoading} viewAllTo="/products?sort=popularity" badge={<Badge tone="amber">Trending</Badge>} />
       <TrustBar />
       <ProductRail title="New arrivals" subtitle="Fresh in the store this week" products={data?.newArrivals} loading={isLoading} viewAllTo="/products?sort=newest" badge={<Badge tone="green">New</Badge>} />
     </div>

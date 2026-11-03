@@ -47,7 +47,7 @@ export default function ProfilePage() {
 
   return (
     <div className="space-y-5">
-      <h1 className="text-2xl font-extrabold tracking-tight">Profile & security</h1>
+      <h1 className="text-xl font-semibold">Profile & security</h1>
       <form onSubmit={profile.handleSubmit(saveProfile)} className="card space-y-4 p-5 sm:p-6" noValidate>
         <h2 className="font-bold">Personal information</h2>
         <div className="grid gap-4 sm:grid-cols-2">

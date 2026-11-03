@@ -35,33 +35,44 @@ export default function ProductsPage() {
   const heading = filters.q ? `Results for “${filters.q}”` : filters.type === 'virtual' ? 'E-books' : filters.category ? filters.category.replace(/-/g, ' ') : 'All products';
 
   return (
-    <div className="container-page py-6">
-      <div className="flex gap-8">
-        <aside className="hidden w-64 shrink-0 lg:block">
-          <div className="card sticky top-32 max-h-[calc(100vh-9rem)] overflow-y-auto p-5"><FilterPanel filters={filters} onChange={update} onClear={clear} /></div>
+    <div className="container-page py-2.5 sm:py-3">
+      <div className="flex gap-2.5 sm:gap-3">
+        <aside className="hidden w-[270px] shrink-0 lg:block">
+          <div className="card sticky top-[116px] max-h-[calc(100vh-8rem)] overflow-y-auto px-4 pb-2 pt-4"><FilterPanel filters={filters} onChange={update} onClear={clear} /></div>
         </aside>
 
-        <div className="min-w-0 flex-1">
-          <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-            <div>
-              <h1 className="text-2xl font-extrabold capitalize tracking-tight">{heading}</h1>
-              <p className="mt-1 text-sm text-slate-500">{isLoading ? 'Loading…' : `${total.toLocaleString('en-IN')} product${total === 1 ? '' : 's'}`}</p>
+        <div className="card min-w-0 flex-1 overflow-hidden">
+          <div className="border-b border-slate-100 px-4 pt-4 dark:border-slate-800">
+            <div className="flex flex-wrap items-baseline gap-x-2">
+              <h1 className="text-base font-semibold capitalize">{heading}</h1>
+              <p className="text-xs text-fk-muted">{isLoading ? 'Loading…' : `(Showing ${total.toLocaleString('en-IN')} product${total === 1 ? '' : 's'})`}</p>
             </div>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" className="lg:hidden" onClick={() => setDrawer(true)}><SlidersHorizontal className="h-4 w-4" /> Filters</Button>
-              <Select aria-label="Sort by" className="w-48" value={filters.sort || ''} onChange={(e) => update({ sort: e.target.value })} options={SORT_OPTIONS} />
+            <div className="mt-2 flex items-center justify-between gap-3 lg:hidden">
+              <Button variant="outline" size="sm" onClick={() => setDrawer(true)}><SlidersHorizontal className="h-4 w-4" /> Filters</Button>
+              <Select aria-label="Sort by" className="w-44" value={filters.sort || ''} onChange={(e) => update({ sort: e.target.value })} options={SORT_OPTIONS} />
             </div>
+            <div className="scrollbar-none mt-1 hidden items-center gap-1 overflow-x-auto text-sm lg:flex" role="tablist" aria-label="Sort by">
+              <span className="mr-2 font-semibold">Sort By</span>
+              {SORT_OPTIONS.map((o) => {
+                const active = (filters.sort || '') === o.value;
+                return (
+                  <button key={o.value} role="tab" aria-selected={active} onClick={() => update({ sort: o.value })} className={`whitespace-nowrap border-b-2 px-3 py-2 transition ${active ? 'border-brand-600 font-semibold text-brand-600' : 'border-transparent text-fk-ink hover:text-brand-600 dark:text-slate-300'}`}>
+                    {o.label}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="pb-3 empty:hidden"><ActiveFilters filters={filters} onChange={update} /></div>
           </div>
-          <ActiveFilters filters={filters} onChange={update} />
 
-          <div className={`mt-5 transition-opacity ${isFetching && !isLoading ? 'opacity-60' : ''}`}>
+          <div className={`transition-opacity ${isFetching && !isLoading ? 'opacity-60' : ''}`}>
             {!isLoading && !data?.data.length ? (
-              <EmptyState icon={SearchX} title="No products found" description="Try removing some filters or searching for something else." action={<Button onClick={clear}>Clear filters</Button>} />
+              <EmptyState icon={SearchX} title="Sorry, no results found!" description="Please check the spelling or try searching for something else." action={<Button onClick={clear}>Clear filters</Button>} />
             ) : (
               <ProductGrid products={data?.data || []} loading={isLoading} skeletonCount={12} />
             )}
           </div>
-          <Pagination className="mt-10" page={page} totalPages={data?.meta?.totalPages} onChange={(p) => { update({ page: String(p) }); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
+          <Pagination className="border-t border-slate-100 py-4 dark:border-slate-800" page={page} totalPages={data?.meta?.totalPages} onChange={(p) => { update({ page: String(p) }); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
         </div>
       </div>
 

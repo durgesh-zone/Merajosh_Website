@@ -14,11 +14,11 @@ export function WishlistButton({ productId, className }) {
         e.stopPropagation();
         toggle(productId);
       }}
-      className={cn('grid h-9 w-9 place-items-center rounded-full bg-white/90 shadow-sm backdrop-blur transition hover:scale-105 dark:bg-slate-900/90', className)}
+      className={cn('grid h-8 w-8 place-items-center rounded-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.12)] transition hover:scale-105 dark:bg-slate-800', className)}
       aria-label={active ? 'Remove from wishlist' : 'Add to wishlist'}
       aria-pressed={active}
     >
-      <Heart className={cn('h-[18px] w-[18px] transition', active ? 'fill-rose-500 text-rose-500' : 'text-slate-500')} />
+      <Heart className={cn('h-[18px] w-[18px] transition', active ? 'fill-[#ff4343] text-[#ff4343]' : 'fill-slate-200 text-slate-300 dark:fill-slate-700 dark:text-slate-600')} />
     </motion.button>
   );
 }

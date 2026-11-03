@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
-import { ShoppingBag } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
+/** Italic wordmark with a yellow tagline; designed to sit on the blue header or the navy footer. */
 export function Logo({ to = '/' }) {
   return (
-    <Link to={to} className="flex items-center gap-2" aria-label="ShopNest home">
-      <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-violet-600 text-white shadow-md shadow-brand-600/30">
-        <ShoppingBag className="h-5 w-5" />
+    <Link to={to} className="flex shrink-0 flex-col leading-none text-white" aria-label="ShopNest home">
+      <span className="text-xl font-extrabold italic tracking-tight">ShopNest</span>
+      <span className="mt-0.5 flex items-center gap-0.5 text-[11px] font-medium italic text-white/85">
+        Shop <span className="font-bold text-fk-yellow">Smart</span>
+        <Sparkles className="h-2.5 w-2.5 fill-fk-yellow text-fk-yellow" aria-hidden />
       </span>
-      <span className="text-lg font-extrabold tracking-tight">Shop<span className="text-brand-600 dark:text-brand-400">Nest</span></span>
     </Link>
   );
 }

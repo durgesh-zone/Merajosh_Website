@@ -23,13 +23,13 @@ export function Stars({ value = 0, size = 14, className }) {
 /** Compact green rating pill (Flipkart-style). */
 export function RatingPill({ value, count, className }) {
   if (!count) return null;
-  const tone = value >= 4 ? 'bg-emerald-600' : value >= 3 ? 'bg-amber-500' : 'bg-rose-500';
+  const tone = value >= 3 ? 'bg-fk-green' : value >= 2 ? 'bg-fk-amber' : 'bg-rose-500';
   return (
     <span className={cn('inline-flex items-center gap-1.5 text-xs text-slate-500', className)}>
-      <span className={cn('inline-flex items-center gap-0.5 rounded-md px-1.5 py-0.5 font-semibold text-white', tone)}>
+      <span className={cn('inline-flex items-center gap-0.5 rounded-sm px-1.5 py-px font-semibold text-white', tone)}>
         {value.toFixed(1)} <Star className="h-3 w-3 fill-white" />
       </span>
-      ({count.toLocaleString('en-IN')})
+      <span className="font-medium text-fk-muted">({count.toLocaleString('en-IN')})</span>
     </span>
   );
 }

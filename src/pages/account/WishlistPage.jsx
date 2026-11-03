@@ -11,7 +11,7 @@ export default function WishlistPage() {
   const { data = [], isLoading } = useQuery({ queryKey: ['wishlist', 'items'], queryFn: accountApi.wishlist });
   return (
     <div>
-      <h1 className="mb-5 text-2xl font-extrabold tracking-tight">Wishlist {data.length > 0 && <span className="text-base font-medium text-slate-500">({data.length})</span>}</h1>
+      <h1 className="mb-5 text-xl font-semibold">Wishlist {data.length > 0 && <span className="text-base font-medium text-slate-500">({data.length})</span>}</h1>
       {!isLoading && !data.length ? (
         <EmptyState icon={Heart} title="Your wishlist is empty" description="Tap the heart on any product to save it for later." action={<Button as={Link} to="/products">Discover products</Button>} />
       ) : (

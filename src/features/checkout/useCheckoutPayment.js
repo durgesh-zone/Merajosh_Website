@@ -49,7 +49,7 @@ export function useCheckoutPayment({ openMock }) {
           name: 'ShopNest',
           description: `Order ${payment.orderNumber}`,
           prefill: payment.prefill,
-          theme: { color: '#4f46e5' },
+          theme: { color: '#2874f0' },
           handler: async (response) => {
             try {
               const verified = await orderApi.verifyPayment({

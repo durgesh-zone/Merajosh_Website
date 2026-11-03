@@ -104,8 +104,8 @@ export default function CheckoutPage() {
 
   let n = 0;
   return (
-    <div className="container-page py-6">
-      <h1 className="flex items-center gap-2 text-2xl font-extrabold tracking-tight"><Lock className="h-5 w-5 text-emerald-600" /> Secure checkout</h1>
+    <div className="container-page py-3">
+      <h1 className="flex items-center gap-2 text-xl font-semibold"><Lock className="h-5 w-5 text-fk-green" /> Secure checkout</h1>
       <div className="mt-6 grid items-start gap-6 lg:grid-cols-[1fr_380px]">
         <div className="space-y-4">
           {needsAddress && (
@@ -125,7 +125,7 @@ export default function CheckoutPage() {
                   <button onClick={() => setAddrModal({ open: true, address: null })} className="flex w-full items-center gap-2 rounded-2xl border-2 border-dashed border-slate-300 p-4 text-sm font-semibold text-brand-600 hover:border-brand-400 hover:bg-brand-50/50 dark:border-slate-700 dark:hover:bg-brand-500/5">
                     <Plus className="h-4 w-4" /> Add a new address
                   </button>
-                  <Button className="mt-2" onClick={() => setStep('summary')} disabled={!addressId}>Deliver here</Button>
+                  <Button variant="buy" className="mt-2 uppercase" onClick={() => setStep('summary')} disabled={!addressId}>Deliver here</Button>
                 </div>
               )}
             </CheckoutStep>
@@ -161,7 +161,7 @@ export default function CheckoutPage() {
               <CouponBox applied={quote.coupon} error={couponCode && quote.couponError} loading={isFetching && Boolean(couponCode)} onApply={setCouponCode} onRemove={() => setCouponCode('')} />
             </div>
             {needsAddress && <Textarea className="mt-4" rows={2} label="Delivery instructions (optional)" maxLength={300} value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="E.g. call before arriving" />}
-            <Button className="mt-5" onClick={() => setStep('payment')} disabled={hasProblems}>Continue to payment</Button>
+            <Button variant="buy" size="lg" className="mt-5 uppercase" onClick={() => setStep('payment')} disabled={hasProblems}>Continue</Button>
           </CheckoutStep>
 
           <CheckoutStep number={++n} title="Payment" active={step === 'payment'}>
@@ -183,7 +183,7 @@ export default function CheckoutPage() {
                 </button>
               ))}
             </div>
-            <Button size="lg" variant="accent" className="mt-5 w-full sm:w-auto" onClick={placeOrder} loading={placing} disabled={hasProblems || !method}>
+            <Button size="lg" variant="buy" className="mt-5 w-full uppercase sm:w-auto" onClick={placeOrder} loading={placing} disabled={hasProblems || !method}>
               {method === 'cod' ? `Place order · ${formatPrice(summary.total)}` : `Pay ${formatPrice(summary.total)}`}
             </Button>
           </CheckoutStep>

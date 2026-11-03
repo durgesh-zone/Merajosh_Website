@@ -9,14 +9,14 @@ export function CartItemRow({ item, onQuantity, onRemove, disabled }) {
   const p = item.product;
   return (
     <motion.li layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, height: 0 }} className="flex gap-4 py-5">
-      <Link to={p ? `/product/${p.slug}` : '#'} className="h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-slate-100 sm:h-28 sm:w-28 dark:bg-slate-800">
-        {p?.image && <img src={assetUrl(p.image)} alt={p.title} className="h-full w-full object-cover" loading="lazy" />}
+      <Link to={p ? `/product/${p.slug}` : '#'} className="h-24 w-24 shrink-0 overflow-hidden bg-white sm:h-28 sm:w-28 dark:bg-slate-800">
+        {p?.image && <img src={assetUrl(p.image)} alt={p.title} className="h-full w-full object-contain" loading="lazy" />}
       </Link>
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             {p ? (
-              <Link to={`/product/${p.slug}`} className="line-clamp-2 font-semibold hover:text-brand-600">{p.title}</Link>
+              <Link to={`/product/${p.slug}`} className="line-clamp-2 hover:text-brand-600">{p.title}</Link>
             ) : (
               <span className="font-semibold text-slate-400">Unavailable product</span>
             )}
@@ -39,7 +39,7 @@ export function CartItemRow({ item, onQuantity, onRemove, disabled }) {
           )}
           {item.available !== false && item.price != null && (
             <div className="text-right">
-              <div className="font-bold">{formatPrice(item.lineTotal)}</div>
+              <div className="text-lg font-semibold">{formatPrice(item.lineTotal)}</div>
               {item.lineMrp > item.lineTotal && <div className="text-xs text-slate-400 line-through">{formatPrice(item.lineMrp)}</div>}
             </div>
           )}
