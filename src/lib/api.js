@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '../strings/endpoints.js';
 import axios from 'axios';
 
 export const APP_NAME = 'shop';
@@ -7,7 +8,7 @@ export const APP_NAME = 'shop';
  * expires we transparently call /auth/refresh once and replay the failed request.
  */
 export const api = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL || ''}/api`,
+  baseURL: API_BASE_URL,
   withCredentials: true,
   headers: { 'X-App': APP_NAME },
 });

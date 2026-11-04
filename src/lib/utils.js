@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 export const cn = (...args) => clsx(...args);
 
-const API_URL = import.meta.env.VITE_API_URL || '';
+import { API_URL } from '../strings/endpoints.js';
 
 /** Resolves server-relative upload URLs (/uploads/...) against the API origin. */
 export const assetUrl = (url) => {

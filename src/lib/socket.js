@@ -1,3 +1,4 @@
+import { SOCKET_URL } from '../strings/endpoints.js';
 import { io } from 'socket.io-client';
 import { APP_NAME } from './api';
 
@@ -6,7 +7,7 @@ let socket = null;
 /** Lazily opens the realtime connection (cookies authenticate it). */
 export function getSocket() {
   if (!socket) {
-    socket = io(import.meta.env.VITE_API_URL || '/', {
+    socket = io(SOCKET_URL, {
       path: '/socket.io',
       withCredentials: true,
       auth: { app: APP_NAME },
